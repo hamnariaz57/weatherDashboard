@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="side-menu">
+            <div class="logo">
+                <img src="./logoo.png" alt="Weather App Logo" />
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="./tables.html">Tables</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <input type="text" placeholder="Search city..." id="search-bar">
+                
+                    <select id="temp-unit">
+                        <option value="Celsius">Celsius</option>
+                        <option value="Fahrenheit">Fahrenheit</option>
+                    </select>
+                
+                <button id="get-weather-btn">Get Weather</button>
+                <div class="user-profile">User Profile</div>
+            </div>
+
+
+            <script>
+                document.getElementById("get-weather-btn").addEventListener("click", function() {
+                 var city = document.getElementById("search-bar").value;
+                 const tempUnit = document.getElementById("temp-unit").value;
+                 var apiKey = "547de5e31698ca0e8a127fdb978914b4"; 
+                  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+                  const dataUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+
+
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("City not found or error in fetching data");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle the weather data
+            console.log(data);
+            const city = data.name;
+            const tempKelvin = data.main.temp; // Convert Kelvin to Celsius
+                const humidity = data.main.humidity;
+                const windSpeed = data.wind.speed;
+                const weatherDescription = data.weather[0].description;
+                const weatherIcon = data.weather[0].icon;
+
+
+                let temperature;
+            if (tempUnit === "Celsius") {
+                temperature = tempKelvin - 273.15; // Convert to Celsius
+                document.getElementById("temperature-unit").innerText = "°C";
+            } else if (tempUnit === "Fahrenheit") {
+                temperature = (data.main.temp - 273.15) * 9/5 + 32; // Convert to Fahrenheit
+                document.getElementById("temperature-unit").innerText = "°F";
+            }
+
+                
+                // Insert weather data into HTML
+                document.getElementById("weather-data").innerHTML = `
+                    <h3>Weather in ${city}</h3>
+                    <p>Temperature: <span id="temperature">${temperature.toFixed(2)}</span> <span id="temperature-unit">${tempUnit === "Celsius" ? "°C" : "°F"}</span></p>
+                    <p>Humidity: ${humidity}%</p>
+                    <p>Wind Speed: ${windSpeed} m/s</p>
+                    <p>Description: ${weatherDescription}</p>
+                    <img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="Weather Icon"/>
+                `;
+
+                const backgroundMap = {
+    'thunderstorm with light rain': 'lightblue',
+    'thunderstorm with rain': 'darkblue',
+    'thunderstorm with heavy rain': 'midnightblue',
+    'light thunderstorm': 'lightgray',
+    'thunderstorm': 'darkgray',
+    'heavy thunderstorm': 'indigo',
+    'ragged thunderstorm': 'slategray',
+    'thunderstorm with light drizzle': 'lightsteelblue',
+    'thunderstorm with drizzle': 'steelblue',
+    'thunderstorm with heavy drizzle': 'royalblue',
+    'light intensity drizzle': 'lightgreen',
+    'drizzle': 'mediumseagreen',
+    'heavy intensity drizzle': 'darkgreen',
+    'light intensity drizzle rain': 'palegreen',
+    'drizzle rain': 'forestgreen',
+    'heavy intensity drizzle rain': 'seagreen',
+    'shower rain and drizzle': 'chartreuse',
+    'heavy shower rain and drizzle': 'limegreen',
+    'shower drizzle': 'lightyellow',
+    'light rain': 'skyblue',
+    'moderate rain': 'deepskyblue',
+    'heavy intensity rain': 'dodgerblue',
+    'very heavy rain': 'royalblue',
+    'extreme rain': 'navy',
+    'freezing rain': 'lightcyan',
+    'light intensity shower rain': 'lightcoral',
+    'shower rain': 'tomato',
+    'heavy intensity shower rain': 'orangered',
+    'ragged shower rain': 'darkorange',
+    'light snow': 'lightgray',
+    'snow': 'whitesmoke',
+    'heavy snow': 'snow',
+    'sleet': 'lightblue',
+    'light shower sleet': 'lightslategray',
+    'shower sleet': 'slategray',
+    'light rain and snow': 'lightcyan',
+    'rain and snow': 'lightsteelblue',
+    'light shower snow': 'lightblue',
+    'shower snow': 'aliceblue',
+    'heavy shower snow': 'lightpink',
+    'mist': 'lightyellow',
+    'smoke': 'gray',
+    'haze': 'khaki',
+    'sand/dust whirls': 'sandybrown',
+    'fog': 'lightgray',
+    'sand': 'peachpuff',
+    'dust': 'tan',
+    'volcanic ash': 'darkslategray',
+    'squalls': 'dimgray',
+    'tornado': 'red',
+    'few clouds': 'lightcyan',
+    'scattered clouds': 'lightblue',
+    'broken clouds': 'lightskyblue',
+    'overcast clouds': 'gray',
+    'clear sky': 'gray'
+        
+    };
+
+    const backgroundColor = backgroundMap[weatherDescription] || 'white';
+    document.getElementById("weather-result").style.background = backgroundColor;
+
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("weather-result").innerHTML = `<p>${error.message}</p>`;
+        });
+
+        
+fetch(dataUrl)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data); 
+
+        const temperatures = data.list.slice(0, 5).map(entry => (entry.main.temp - 273.15).toFixed(1)); // Convert Kelvin to Celsius
+                const weatherConditions = data.list.slice(0, 5).map(entry => entry.weather[0].main);
+                
+                // Create a frequency count for the weather conditions
+                const weatherCount = {};
+                weatherConditions.forEach(condition => {
+                    weatherCount[condition] = (weatherCount[condition] || 0) + 1;
+                });
+
+                // Data for Bar Chart
+                const barChartCtx = document.getElementById('barChart').getContext('2d');
+                const barChart = new Chart(barChartCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+                        datasets: [{
+                            label: 'Temperature (°C)',
+                            data: temperatures,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Temperature (°C)'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Data for Doughnut Chart
+                const doughnutChartCtx = document.getElementById('doughnutChart').getContext('2d');
+                const doughnutChart = new Chart(doughnutChartCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.keys(weatherCount),
+                        datasets: [{
+                            label: 'Weather Conditions',
+                            data: Object.values(weatherCount),
+                            backgroundColor: [
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Weather Conditions Distribution'
+                            }
+                        }
+                    }
+                });
+
+                // Data for Line Chart
+                const lineChartCtx = document.getElementById('lineChart').getContext('2d');
+                const lineChart = new Chart(lineChartCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+                        datasets: [{
+                            label: 'Temperature (°C)',
+                            data: temperatures,
+                            fill: false,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Temperature (°C)'
+                                }
+                            }
+                        }
+                    }
+                });
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+});
+
+
+            </script>
+
+
+<div id="weather-result">
+    <h2>Weather Information</h2>
+    <div id="weather-data">
+        <div id="temperature-unit"></div>
+    </div>
+</div>
+
+            <!-- Charts Section -->
+            <div class="charts">
+            <canvas id="barChart"></canvas>
+            <canvas id="doughnutChart"></canvas>
+            <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.logo img {
+    max-width: 70%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.side-menu {
+    width: 20%;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.charts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+canvas {
+    width: 100% !important; /* Override canvas default width */
+    height: 400px !important; /* Override canvas default height */
+}
+
+.logo {
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 18px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+#get-weather-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+#temp-unit {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 10px 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+}
+
+#get-weather-btn:hover {
+    background-color: #2980b9; /* Darker shade for hover effect */
+}
+
+
+#search-bar {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.user-profile {
+    background-color: #3498db;
+    text-align: center;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.weather-data {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.charts {
+    display: flex;
+    justify-content: space-around;
+}
+
+.chart {
+    width: 30%;
+    height: 200px;
+    background-color: #bdc3c7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .side-menu {
+        width: 100%;
+        display: none;
+    }
+
+    .main-content {
+        flex: 1;
+    }
+
+    .charts {
+        flex-direction: column;
+    }
+
+    .chart {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+#weather-result {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: background 0.5s ease;
+}
+
+h2 {
+    color: #333;
+}
+
+h3 {
+    color: #007BFF;
+}
+
+p {
+    color: #555;
+}
+
+img {
+    margin-top: 10px;
+    width: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.side-menu {
+    width: 20%;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 18px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#search-bar {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.user-profile {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.content-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-section, .chatbot-section {
+    width: 48%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #7f8c8d;
+    padding: 8px;
+    text-align: center;
+}
+
+thead {
+    background-color: #3498db;
+    color: white;
+}
+
+.chatbot-section {
+    display: flex;
+    flex-direction: column;
+}
+
+#chatbot-output {
+    height: 150px;
+    border: 1px solid #7f8c8d;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+#chatbot-input {
+    padding: 10px;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .side-menu {
+        width: 100%;
+        display: none;
+    }
+
+    .main-content {
+        flex: 1;
+    }
+
+    .content-section {
+        flex-direction: column;
+    }
+
+    .table-section, .chatbot-section {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

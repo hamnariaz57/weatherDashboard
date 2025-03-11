@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard - Tables</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Side Menu -->
+        <div class="side-menu">
+            <div class="logo">
+                <img src="./logoo.png" alt="Weather App Logo" />
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="./index.html" id="dashboard-link">Dashboard</a></li>
+                    <li><a href="#" id="tables-link">Tables</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <input type="text" placeholder="Search city..." id="search-bar">
+                <div class="user-profile">User Profile</div>
+            </div>
+
+            <!-- Table and Chatbot Section -->
+            <div class="content-section">
+                <!-- Table -->
+                <div class="table-section">
+                    <h3>Weather Data Table</h3>
+                    <table id="weather-table">
+                        <thead>
+                            <tr>
+                                <th>City</th>
+                                <th>Temperature</th>
+                                <th>Humidity</th>
+                                <th>Wind Speed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>New York</td>
+                                <td>22°C</td>
+                                <td>60%</td>
+                                <td>12 km/h</td>
+                            </tr>
+                            <!-- Additional rows can be added dynamically with JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Chatbot Section -->
+                <div class="chatbot-section">
+                    <h3>Chatbot</h3>
+                    <div id="chatbot-output">Answer area for chatbot...</div>
+                    <input type="text" id="chatbot-input" placeholder="Type a message...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
